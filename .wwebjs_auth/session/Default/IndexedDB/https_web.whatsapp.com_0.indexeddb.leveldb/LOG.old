@@ -1,0 +1,30 @@
+2025/01/22-11:27:14.945 2044 Reusing MANIFEST D:\Single Auth Api\npmWhatsapp js\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2025/01/22-11:27:14.946 2044 Recovering log #1282
+2025/01/22-11:27:14.947 2044 Reusing old log D:\Single Auth Api\npmWhatsapp js\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/001282.log 
+2025/01/22-11:27:14.947 2044 Delete type=2 #1274
+2025/01/22-11:27:14.947 2044 Delete type=2 #1275
+2025/01/22-11:27:14.948 2044 Delete type=2 #1276
+2025/01/22-11:27:14.948 2044 Delete type=2 #1277
+2025/01/22-11:27:14.948 2044 Delete type=2 #1279
+2025/01/22-11:27:21.507 46b0 Compacting 1@1 + 1@2 files
+2025/01/22-11:27:22.167 46b0 Level-0 table #1291: started
+2025/01/22-11:27:22.177 46b0 Level-0 table #1291: 15201 bytes OK
+2025/01/22-11:27:22.183 46b0 Delete type=0 #1282
+2025/01/22-11:27:22.339 46b0 Generated table #1289@1: 41311 keys, 2168027 bytes
+2025/01/22-11:27:22.339 46b0 Compacted 1@1 + 1@2 files => 2168027 bytes
+2025/01/22-11:27:22.344 46b0 compacted to: files[ 1 0 4 0 0 0 0 ]
+2025/01/22-11:27:22.345 46b0 Manual compaction at level-0 from '\x00X\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00Y\x00\x00\x00' @ 0 : 0; will stop at '\x00X\x00\x00\x05' @ 3970348 : 1
+2025/01/22-11:27:22.345 46b0 Compacting 1@0 + 0@1 files
+2025/01/22-11:27:22.370 46b0 Generated table #1292@0: 417 keys, 8287 bytes
+2025/01/22-11:27:22.370 46b0 Compacted 1@0 + 0@1 files => 8287 bytes
+2025/01/22-11:27:22.375 46b0 compacted to: files[ 0 1 4 0 0 0 0 ]
+2025/01/22-11:27:22.375 46b0 Delete type=2 #1291
+2025/01/22-11:27:22.376 46b0 Manual compaction at level-0 from '\x00X\x00\x00\x05' @ 3970348 : 1 .. '\x00Y\x00\x00\x00' @ 0 : 0; will stop at (end)
+2025/01/22-11:27:29.241 2044 Compacting 1@1 + 1@2 files
+2025/01/22-11:27:29.433 2044 Generated table #1293@1: 41397 keys, 2172962 bytes
+2025/01/22-11:27:29.433 2044 Compacted 1@1 + 1@2 files => 2172962 bytes
+2025/01/22-11:27:29.438 2044 compacted to: files[ 0 0 4 0 0 0 0 ]
+2025/01/22-11:27:29.439 2044 Delete type=2 #1281
+2025/01/22-11:27:29.439 2044 Delete type=2 #1287
+2025/01/22-11:27:29.439 2044 Delete type=2 #1289
+2025/01/22-11:27:29.439 2044 Delete type=2 #1292
