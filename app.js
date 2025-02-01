@@ -110,6 +110,10 @@ const initializeClient = async () => {
   });
 };
 
+app.get("/ping", async (req, res) => {
+  // Serve the index.html file
+  res.send("Pong!");
+});
 app.get("/home", async (req, res) => {
   // Serve the index.html file
   res.sendFile(path.join(__dirname, "public", "index.html"));
