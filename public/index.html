@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Send WhatsApp Message</title>
+    <script src="https://cdn.socket.io/4.3.2/socket.io.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 20px;
+      }
+      .container {
+        max-width: 600px;
+        margin: auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      h2 {
+        text-align: center;
+      }
+      .qr-code {
+        text-align: center;
+        margin: 20px 0;
+      }
+      .form-container {
+        display: none;
+      }
+      label {
+        display: block;
+        margin: 10px 0 5px;
+      }
+      input[type="text"],
+      input[type="url"],
+      textarea {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      button {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+      .message {
+        margin-top: 20px;
+        text-align: center;
+      }
+      .logout-btn {
+        background-color: #f44336;
+        margin-top: 20px;
+        width: auto;
+        padding: 5px 10px;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+      .logout-btn:hover {
+        background-color: #e53935;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Send WhatsApp Message</h2>
+
+      <!-- QR Code Section -->
+      <div class="qr-code" id="qrCodeContainer">
+        <p>Scan the QR code below to connect with WhatsApp:</p>
+        <img id="qrCode" src="" alt="QR Code" width="300" />
+      </div>
+
+      <!-- Form Section -->
+      <div class="form-container" id="messageFormContainer">
+        <form id="messageForm">
+          <label for="phoneNumber">Phone Number (with country code):</label>
+          <input
+            type="text"
+            id="phoneNumber"
+            name="phoneNumber"
+            required
+            placeholder="+1234567890"
+          />
+
+          <label for="messageBody">Message:</label>
+          <textarea
+            id="messageBody"
+            name="messageBody"
+            rows="4"
+            required
+            placeholder="Enter your message here..."
+          ></textarea>
+
+          <label for="imageUrl">Image URL (optional):</label>
+          <input
+            type="url"
+            id="imageUrl"
+            name="imageUrl"
+            placeholder="Enter image URL (optional)"
+          />
+
+          <button type="submit">Send Message</button>
+        </form>
+
+        <div class="message" id="responseMessage"></div>
+        <button class="logout-btn" id="logoutButton" style="display: none">
+          Logout
+        </button>
+      </div>
+    </div>
+
+    <script>
+      // Connect to Socket.IO server
+      const socket = io("http://localhost:3000");
+
+      // Listen for QR code event and display it
+      socket.on("qr", (qrCodeUrl) => {
+        document.getElementById("qrCode").src = qrCodeUrl;
+      });
+
+      // Listen for client ready event and show the message form
+      socket.on("client-ready", () => {
+        document.getElementById("qrCodeContainer").style.display = "none";
+        document.getElementById("messageFormContainer").style.display = "block";
+        document.getElementById("logoutButton").style.display = "inline-block";
+      });
+
+      setTimeout(() => {
+        socket.emit("join", { message: "Jeel joined!" });
+      }, 2000);
+
+      // Handle form submission to send message
+      document
+        .getElementById("messageForm")
+        .addEventListener("submit", async function (event) {
+          event.preventDefault();
+
+          const phoneNumber = document.getElementById("phoneNumber").value;
+          const messageBody = document.getElementById("messageBody").value;
+          const imageUrl = document.getElementById("imageUrl").value;
+
+          const responseMessage = document.getElementById("responseMessage");
+
+          try {
+            const response = await fetch("http://localhost:3000/send-message", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ phoneNumber, messageBody, imageUrl }),
+            });
+
+            if (response.ok) {
+              responseMessage.textContent = "✅ Message sent successfully!";
+              responseMessage.style.color = "green";
+            } else {
+              responseMessage.textContent = "❌ Error sending message.";
+              responseMessage.style.color = "red";
+            }
+          } catch (error) {
+            responseMessage.textContent = "❌ Error: " + error.message;
+            responseMessage.style.color = "red";
+          }
+        });
+      document.getElementById("logoutButton").addEventListener("click", () => {
+        socket.emit("logout");
+        document.getElementById("qrCodeContainer").style.display = "block";
+        document.getElementById("messageFormContainer").style.display = "none";
+        document.getElementById("logoutButton").style.display = "none";
+      });
+    </script>
+  </body>
+</html>
