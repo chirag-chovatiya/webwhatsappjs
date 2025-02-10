@@ -41,7 +41,7 @@ const initializeClient = async () => {
   const client = new Client({
     authStrategy: new RemoteAuth({
       store: store,
-      backupSyncIntervalMs: 300000, // 5 minutes
+      backupSyncIntervalMs: 900000, // 5 minutes
     }),
   });
 
