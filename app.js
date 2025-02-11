@@ -151,8 +151,12 @@ app.post("/send-message", async (req, res) => {
     // Send messages
     if (messageBody) await chat.sendMessage(messageBody);
     if (imageUrl) {
-      const media = await MessageMedia.fromUrl(imageUrl);
-      await chat.sendMessage(media);
+      try {
+        const media = await MessageMedia.fromUrl(imageUrl);
+        await chat.sendMessage(media);
+      } catch (error) {
+        
+      }
     }
 
     res.status(200).send("✅ Message sent successfully!");

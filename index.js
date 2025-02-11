@@ -10,7 +10,7 @@ const app = express();
 app.use(bodyParser.json());
 
 const MONGO_URI = process.env.MONGO_URI;
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 3000;
 
 console.log("Starting server...");
 console.log("MongoDB URI:", MONGO_URI);
